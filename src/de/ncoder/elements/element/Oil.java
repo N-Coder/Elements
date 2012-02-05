@@ -5,11 +5,13 @@ import de.ncoder.elements.engine.Element;
 
 public class Oil extends Element implements Burnable{
 	private boolean burning = false;
+	private int timeout;
 	
 	public Oil() {
 		setColor(110, 99, 86);
 		setGravity(1);
 		setFluidity(5);
+		timeout = random.nextInt(200)+100;
 	}
 
 	@Override
@@ -30,6 +32,10 @@ public class Oil extends Element implements Burnable{
 				break;
 			}
 		}
+		if(timeout<=0) {
+			getWorld().removeElement(this);
+		}
+		timeout--;
 	}
 	
 	@Override

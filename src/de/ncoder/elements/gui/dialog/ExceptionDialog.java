@@ -43,14 +43,12 @@ public class ExceptionDialog extends JDialog {
 		setContentPane(pane);
 		pane.setBorder(new EmptyBorder(10, 10, 10, 10));
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0 };
-		gridBagLayout.columnWeights = new double[] { 1.0, Double.MIN_VALUE };
-		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE };
 		getContentPane().setLayout(gridBagLayout);
 
 		exception = new JLabel("Exception");
 		exception.setBorder(new EmptyBorder(10, 10, 10, 10));
 		GridBagConstraints gbc_excpetion = new GridBagConstraints();
+		gbc_excpetion.weightx = 1.0;
 		gbc_excpetion.fill = GridBagConstraints.HORIZONTAL;
 		gbc_excpetion.anchor = GridBagConstraints.NORTH;
 		gbc_excpetion.insets = new Insets(0, 0, 5, 0);
