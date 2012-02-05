@@ -1,0 +1,68 @@
+<list>
+	<Action type="LOAD_FROM">
+		<key character="L" ctrlDown="true" shiftDown="true" altDown="false" />
+	</Action>
+	<Action type="NEW">
+		<key character="N" ctrlDown="true" shiftDown="false" altDown="false" />
+	</Action>
+	<Action type="LOAD">
+		<key character="L" ctrlDown="true" shiftDown="false" altDown="false" />
+	</Action>
+	<Action type="SAVE">
+		<key character="S" ctrlDown="true" shiftDown="false" altDown="false" />
+	</Action>
+	<Action type="SAVE_AS">
+		<key character="S" ctrlDown="true" shiftDown="true" altDown="false" />
+	</Action>
+	<Action type="STAT">
+		<key character="I" ctrlDown="true" shiftDown="false" altDown="false" />
+	</Action>
+	<Action type="RESIZE">
+		<key character="R" ctrlDown="true" shiftDown="false" altDown="false" />
+	</Action>
+	<Action type="PLAY_PAUSE">
+		<key character="P" ctrlDown="true" shiftDown="true" altDown="false" />
+	</Action>
+	<SelectAction additional="de.ncoder.elements.element.Earth">
+		<key character="1" ctrlDown="false" shiftDown="false" altDown="false" />
+	</SelectAction>
+	<SelectAction additional="de.ncoder.elements.element.Sand">
+		<key character="2" ctrlDown="false" shiftDown="false" altDown="false" />
+	</SelectAction>
+	<SelectAction additional="de.ncoder.elements.element.Stone">
+		<key character="3" ctrlDown="false" shiftDown="false" altDown="false" />
+	</SelectAction>
+	<SelectAction additional="de.ncoder.elements.element.Water">
+		<key character="4" ctrlDown="false" shiftDown="false" altDown="false" />
+	</SelectAction>
+	<SelectAction additional="de.ncoder.elements.element.Magma">
+		<key character="5" ctrlDown="false" shiftDown="false" altDown="false" />
+	</SelectAction>
+	<SelectAction additional="de.ncoder.elements.element.Plant">
+		<key character="6" ctrlDown="false" shiftDown="false" altDown="false" />
+	</SelectAction>
+	<SelectAction additional="de.ncoder.elements.element.Fuse">
+		<key character="7" ctrlDown="false" shiftDown="false" altDown="false" />
+	</SelectAction>
+	<SelectAction additional="de.ncoder.elements.element.Acid">
+		<key character="8" ctrlDown="false" shiftDown="false" altDown="false" />
+	</SelectAction>
+	<SelectAction additional="de.ncoder.elements.element.Oil">
+		<key character="9" ctrlDown="false" shiftDown="false" altDown="false" />
+	</SelectAction>
+	<SelectAction additional="de.ncoder.elements.element.Spawner">
+		<key character="Y" ctrlDown="false" shiftDown="false" altDown="false" />
+	</SelectAction>
+	<SelectAction additional="de.ncoder.elements.element.Fire">
+		<key character="F" ctrlDown="false" shiftDown="false" altDown="false" />
+	</SelectAction>
+	<SelectAction additional="de.ncoder.elements.element.Hole">
+		<key character="X" ctrlDown="false" shiftDown="false" altDown="false" />
+	</SelectAction>
+	<SelectAction additional="de.ncoder.elements.element.Firework">
+		<key character="C" ctrlDown="false" shiftDown="false" altDown="false" />
+	</SelectAction>
+	<SelectAction additional="de.ncoder.elements.element.Delete">
+		<key character=" " ctrlDown="false" shiftDown="false" altDown="false" />
+	</SelectAction>
+</list>
