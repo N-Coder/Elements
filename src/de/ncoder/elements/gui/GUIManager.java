@@ -2,6 +2,7 @@ package de.ncoder.elements.gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,6 +20,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -32,6 +34,7 @@ import de.ncoder.elements.gui.action.SelectAction;
 import de.ncoder.elements.gui.dialog.ExceptionDialog;
 import de.ncoder.elements.gui.dialog.SizeDialog;
 import de.ncoder.elements.gui.frame.CanvasFrame;
+import de.ncoder.elements.gui.frame.InfoFrame;
 import de.ncoder.elements.gui.frame.MapFrame;
 import de.ncoder.elements.gui.frame.MenuFrame;
 import de.ncoder.elements.gui.frame.ModFrame;
@@ -43,9 +46,15 @@ public class GUIManager {
 	private Manager manager;
 	private Map<String, NFrame> frames = new HashMap<String, NFrame>();
 	private JFileChooser saveChooser;
+	private Image defaultIcon;
 
 	public GUIManager(Manager manager) {
 		this.manager = manager;
+		try {
+			defaultIcon = ImageIO.read(getClass().getResource("/icon.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public Manager getManager() {
@@ -84,6 +93,10 @@ public class GUIManager {
 
 	public JFileChooser getFileChooser() {
 		return saveChooser;
+	}
+
+	public Image getDefaultIcon() {
+		return defaultIcon;
 	}
 
 	// -------------------------------LISTENERS---------------------------------
@@ -152,6 +165,11 @@ public class GUIManager {
 							modFrame.refresh();
 							modFrame.setVisible(true);
 							break;
+						case INFO:
+							InfoFrame infoFrame = new InfoFrame();
+							infoFrame.create();
+							infoFrame.setVisible(true);
+							break;
 						/*
 						 * case SAVE:
 						 * manager.getWorldManager().save(); break; case LOAD:
@@ -217,8 +235,8 @@ public class GUIManager {
 	}
 
 	public AbstractAction<?> getAction(Key k) {
-		for(AbstractAction<?> a:keyCommands) {
-			if(a.getKey().equals(k)){
+		for (AbstractAction<?> a : keyCommands) {
+			if (a.getKey().equals(k)) {
 				return a;
 			}
 		}
@@ -271,13 +289,13 @@ public class GUIManager {
 	}
 
 	public void addActions(List<? extends AbstractAction<?>> l) {
-		for(AbstractAction<?> a:l) {
+		for (AbstractAction<?> a : l) {
 			addAction(a);
 		}
 	}
 
 	public void removeActions(List<? extends AbstractAction<?>> l) {
-		for(AbstractAction<?> a:l) {
+		for (AbstractAction<?> a : l) {
 			removeAction(a);
 		}
 	}
@@ -568,6 +586,7 @@ public class GUIManager {
 	}
 
 	public NFrame putFrame(String name, NFrame frame) {
+		frame.setIconImage(getDefaultIcon());
 		return frames.put(name, frame);
 	}
 

@@ -22,7 +22,8 @@ public class MenuBar extends JMenuBar {
 	private Manager manager;
 
 	private JMenu world;
-	private JMenu view;
+	private JMenu edit;
+	private JMenu extra;
 
 	private JMenu traces;
 	private JMenu brush;
@@ -50,7 +51,8 @@ public class MenuBar extends JMenuBar {
 	public void create() {
 		createListeners();
 		createMenuWorld();
-		createMenuView();
+		createMenuEdit();
+		createMenuExtra();
 	}
 
 	public void createListeners() {
@@ -87,19 +89,18 @@ public class MenuBar extends JMenuBar {
 		world.add(makeMenuItem(new JMenuItem(), "Load", new Action<Object>(ActionType.LOAD)));
 		world.add(makeMenuItem(new JMenuItem(), "Save As", new Action<Object>(ActionType.SAVE_AS, null)));
 		world.add(makeMenuItem(new JMenuItem(), "Load From", new Action<Object>(ActionType.LOAD_FROM, null)));
-		world.add(makeMenuItem(new JMenuItem(), "Convert", new Action<Object>(ActionType.CONVERT, null)));
 		world.addSeparator();
 		active = (JCheckBoxMenuItem) makeMenuItem(new JCheckBoxMenuItem(), "Play", new Action<Object>(ActionType.PLAY_PAUSE, null));
 		world.add(active);
 	}
 
-	public void createMenuView() {
-		view = new JMenu("View");
-		view.addMenuListener(menuListener);
-		add(view);
+	public void createMenuEdit() {
+		edit = new JMenu("View");
+		edit.addMenuListener(menuListener);
+		add(edit);
 
 		traces = new JMenu("Traces");
-		view.add(traces);
+		edit.add(traces);
 		tracesGroup = new ButtonGroup();
 
 		tracesOff = (JRadioButtonMenuItem) makeMenuItem(new JRadioButtonMenuItem(), "Off", new Action<Object>(ActionType.TRACES, 0));
@@ -115,7 +116,7 @@ public class MenuBar extends JMenuBar {
 		traces.add(tracesStrong);
 
 		brush = new JMenu("Brush");
-		view.add(brush);
+		edit.add(brush);
 		brushGroup = new ButtonGroup();
 
 		brush1 = (JRadioButtonMenuItem) makeMenuItem(new JRadioButtonMenuItem(), "Size 1", new Action<Object>(ActionType.BRUSH, 1));
@@ -133,8 +134,16 @@ public class MenuBar extends JMenuBar {
 		brush10 = (JRadioButtonMenuItem) makeMenuItem(new JRadioButtonMenuItem(), "Size 10", new Action<Object>(ActionType.BRUSH, 10));
 		brushGroup.add(brush10);
 		brush.add(brush10);
+	}
 
-		view.add(makeMenuItem(new JMenuItem(), "Mods", new Action<Object>(ActionType.MODS, null)));
+	public void createMenuExtra() {
+		extra = new JMenu("Extra");
+		extra.addMenuListener(menuListener);
+		add(extra);
+
+		extra.add(makeMenuItem(new JMenuItem(), "Mods", new Action<Object>(ActionType.MODS, null)));
+		extra.add(makeMenuItem(new JMenuItem(), "Convert", new Action<Object>(ActionType.CONVERT, null)));
+		extra.add(makeMenuItem(new JMenuItem(), "Info", new Action<Object>(ActionType.INFO, null)));
 	}
 
 	public void refresh() {

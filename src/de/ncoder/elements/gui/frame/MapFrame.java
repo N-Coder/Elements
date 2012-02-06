@@ -19,6 +19,7 @@ public class MapFrame extends ElementsCanvasFrame implements MouseListener, Mous
 
 	public MapFrame(Manager manager) {
 		super(manager);
+		setTitle("Map");
 	}
 
 	public void create() {

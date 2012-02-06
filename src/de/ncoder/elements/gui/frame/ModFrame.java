@@ -42,6 +42,7 @@ public class ModFrame extends JFrame {
 
 	public ModFrame(Manager manager) {
 		this.manager = manager;
+		setTitle("Mod");
 	}
 
 	public void create() {

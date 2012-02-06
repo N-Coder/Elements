@@ -15,6 +15,7 @@ public class MenuFrame extends ElementsFrame {
 
 	public MenuFrame(Manager manager) {
 		super(manager);
+		setTitle("Menu");
 	}
 
 	@Override
