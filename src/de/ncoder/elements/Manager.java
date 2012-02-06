@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,6 +22,7 @@ import de.ncoder.elements.gui.action.Action;
 import de.ncoder.elements.gui.action.SelectAction;
 import de.ncoder.elements.mod.Mod;
 import de.ncoder.elements.mod.ModManager;
+import de.ncoder.elements.mod.ModManifest;
 import de.ncoder.elements.utils.ColorConverter;
 import de.ncoder.elements.utils.settings.ExtendedProperties;
 import de.ncoder.nlib.Key;
@@ -391,6 +393,13 @@ public class Manager {
 	}
 
 	/**
+	 * Updates the XStream's ClassLoader to respect the selected URL.
+	 */
+	public void updateXStream(URL... urls) {
+		xStream.setClassLoader(new URLClassLoader(urls, getClass().getClassLoader()));
+	}
+
+	/**
 	 * Initializes the XSTREAM with some default aliases and converters
 	 */
 	public void initXStream() {
@@ -400,6 +409,7 @@ public class Manager {
 		xStream.alias("World", World.class);
 		xStream.alias("Action", Action.class);
 		xStream.alias("SelectAction", SelectAction.class);
+		xStream.alias("Manifest", ModManifest.class);
 		xStream.aliasPackage("element", "de.ncoder.elements.element");
 
 		xStream.useAttributeFor(Key.class, "character");

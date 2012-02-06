@@ -81,6 +81,7 @@ public class ModManager {
 		mod.setModManifest(manifest);
 		mod.setManager(manager);
 		mod.setUrls(Arrays.asList(locations));
+		mod.init();
 		return mod;
 	}
 
@@ -133,7 +134,7 @@ public class ModManager {
 				throw new FileNotFoundException("manifest.xml couldn't be found by URLClassLoader");
 			}
 		}
-		manager.updateXStream();
+		manager.updateXStream(loader.getURLs());
 		return (ModManifest) manager.getXStream().fromXML(manifestURL.openConnection().getInputStream());
 	}
 

@@ -15,6 +15,8 @@ public abstract class Mod {
 	protected Manager manager;
 
 	public Mod() {}
+	
+	public void init() {}
 
 	public boolean isActive() {
 		return active;

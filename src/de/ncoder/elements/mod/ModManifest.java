@@ -1,6 +1,7 @@
 package de.ncoder.elements.mod;
 
-
+import java.util.HashMap;
+import java.util.Map;
 
 public final class ModManifest {
 	private String modName;
@@ -8,6 +9,7 @@ public final class ModManifest {
 	private String modVersionName;
 	private int modVersion;
 	private String modDescription;
+	private Map<String, Object> modAdditional = new HashMap<String, Object>();
 
 	@SuppressWarnings("unused")
 	private ModManifest() {}
@@ -38,6 +40,14 @@ public final class ModManifest {
 
 	public String getModDescription() {
 		return modDescription;
+	}
+
+	public Object getAdditional(String key) {
+		return modAdditional.get(key);
+	}
+
+	public void setAdditional(String key, Object value) {
+		modAdditional.put(key, value);
 	}
 
 	@Override
