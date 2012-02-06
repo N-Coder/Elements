@@ -23,7 +23,9 @@ import de.ncoder.elements.gui.action.SelectAction;
 import de.ncoder.elements.mod.Mod;
 import de.ncoder.elements.mod.ModManager;
 import de.ncoder.elements.mod.ModManifest;
+import de.ncoder.elements.mod.SimpleMod;
 import de.ncoder.elements.utils.ColorConverter;
+import de.ncoder.elements.utils.StringMapConverter;
 import de.ncoder.elements.utils.settings.ExtendedProperties;
 import de.ncoder.nlib.Key;
 import de.ncoder.nlib.gui.NFrame;
@@ -410,6 +412,8 @@ public class Manager {
 		xStream.alias("Action", Action.class);
 		xStream.alias("SelectAction", SelectAction.class);
 		xStream.alias("Manifest", ModManifest.class);
+		xStream.alias("Mod", Mod.class);
+		xStream.alias("SimpleMod", SimpleMod.class);
 		xStream.aliasPackage("element", "de.ncoder.elements.element");
 
 		xStream.useAttributeFor(Key.class, "character");
@@ -429,8 +433,10 @@ public class Manager {
 		xStream.useAttributeFor(Character.class);
 		xStream.useAttributeFor(Class.class);
 		xStream.useAttributeFor(Color.class);
+		xStream.useAttributeFor(String.class);
 
 		xStream.registerConverter(new ColorConverter());
+		xStream.registerLocalConverter(ModManifest.class, "modAdditional", new StringMapConverter<Object>(xStream.getMapper(), "key"));
 	}
 
 	public XStream getXStream() {

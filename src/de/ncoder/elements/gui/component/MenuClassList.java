@@ -18,6 +18,9 @@ public class MenuClassList extends JList<SelectAction> implements KeyListener {
 	private Comparator<AbstractAction<?>> comparator = new Comparator<AbstractAction<?>>() {
 		@Override
 		public int compare(AbstractAction<?> o1, AbstractAction<?> o2) {
+			if (o1.getKey() == null || o2.getKey() == null) {
+				return 0;
+			}
 			if (o1.getKey().isCtrlDown() != o2.getKey().isCtrlDown()) {
 				if (!o1.getKey().isCtrlDown()) {
 					return -30;
