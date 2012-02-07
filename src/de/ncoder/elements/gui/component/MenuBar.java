@@ -23,24 +23,25 @@ public class MenuBar extends JMenuBar {
 
 	private JMenu world;
 	private JMenu edit;
-	private JMenu extra;
+	private JMenu extras;
 
 	private JMenu traces;
 	private JMenu brush;
 
 	private JCheckBoxMenuItem active;
+	private JCheckBoxMenuItem cursor;
 
+	private ButtonGroup tracesGroup;
 	private JRadioButtonMenuItem tracesOff;
 	private JRadioButtonMenuItem tracesSlight;
 	private JRadioButtonMenuItem tracesStrong;
 
+	private ButtonGroup brushGroup;
 	private JRadioButtonMenuItem brush1;
 	private JRadioButtonMenuItem brush3;
 	private JRadioButtonMenuItem brush5;
 	private JRadioButtonMenuItem brush10;
 
-	private ButtonGroup tracesGroup;
-	private ButtonGroup brushGroup;
 	private ActionListener actionListener;
 	private MenuListener menuListener;
 
@@ -52,7 +53,7 @@ public class MenuBar extends JMenuBar {
 		createListeners();
 		createMenuWorld();
 		createMenuEdit();
-		createMenuExtra();
+		createMenuExtras();
 	}
 
 	public void createListeners() {
@@ -95,7 +96,7 @@ public class MenuBar extends JMenuBar {
 	}
 
 	public void createMenuEdit() {
-		edit = new JMenu("View");
+		edit = new JMenu("Edit");
 		edit.addMenuListener(menuListener);
 		add(edit);
 
@@ -134,16 +135,20 @@ public class MenuBar extends JMenuBar {
 		brush10 = (JRadioButtonMenuItem) makeMenuItem(new JRadioButtonMenuItem(), "Size 10", new Action<Object>(ActionType.BRUSH, 10));
 		brushGroup.add(brush10);
 		brush.add(brush10);
+
+		cursor = (JCheckBoxMenuItem) makeMenuItem(new JCheckBoxMenuItem(), "Cursor", new Action<Object>(ActionType.CURSOR));
+		edit.add(cursor);
+
 	}
 
-	public void createMenuExtra() {
-		extra = new JMenu("Extra");
-		extra.addMenuListener(menuListener);
-		add(extra);
+	public void createMenuExtras() {
+		extras = new JMenu("Extras");
+		extras.addMenuListener(menuListener);
+		add(extras);
 
-		extra.add(makeMenuItem(new JMenuItem(), "Mods", new Action<Object>(ActionType.MODS, null)));
-		extra.add(makeMenuItem(new JMenuItem(), "Convert", new Action<Object>(ActionType.CONVERT, null)));
-		extra.add(makeMenuItem(new JMenuItem(), "Info", new Action<Object>(ActionType.INFO, null)));
+		extras.add(makeMenuItem(new JMenuItem(), "Mods", new Action<Object>(ActionType.MODS, null)));
+		extras.add(makeMenuItem(new JMenuItem(), "Convert", new Action<Object>(ActionType.CONVERT, null)));
+		extras.add(makeMenuItem(new JMenuItem(), "Info", new Action<Object>(ActionType.INFO, null)));
 	}
 
 	public void refresh() {
@@ -181,6 +186,7 @@ public class MenuBar extends JMenuBar {
 			break;
 		}
 		active.setSelected(manager.getWorld().isActive());
+		cursor.setSelected(!manager.getGuiManager().isBlankCursor());
 	}
 
 	public JMenuItem makeMenuItem(JMenuItem item, String title, AbstractAction<?> a) {

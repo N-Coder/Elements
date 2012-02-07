@@ -1,14 +1,17 @@
 package de.ncoder.elements.gui;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -47,6 +50,7 @@ public class GUIManager {
 	private Map<String, NFrame> frames = new HashMap<String, NFrame>();
 	private JFileChooser saveChooser;
 	private Image defaultIcon;
+	private Cursor blankCursor;
 
 	public GUIManager(Manager manager) {
 		this.manager = manager;
@@ -55,6 +59,8 @@ public class GUIManager {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB), new Point(0, 0), "blank cursor");
+
 	}
 
 	public Manager getManager() {
@@ -88,6 +94,7 @@ public class GUIManager {
 		});
 		saveChooser = new JFileChooser(manager.getProperties().getProperty("default.folder"));
 		saveChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+		setBlankCursor(manager.getProperties().getBoolean("canvas.cursor"));
 		setVisible(true);
 	}
 
@@ -97,6 +104,22 @@ public class GUIManager {
 
 	public Image getDefaultIcon() {
 		return defaultIcon;
+	}
+
+	public void setBlankCursor(boolean blank) {
+		if (blank) {
+			getFrame(CanvasFrame.class).setCursor(blankCursor);
+		} else {
+			getFrame(CanvasFrame.class).setCursor(Cursor.getDefaultCursor());
+		}
+	}
+
+	public boolean isBlankCursor() {
+		return getFrame(CanvasFrame.class).getCursor() == blankCursor;
+	}
+
+	public void toggleBlankCursor() {
+		setBlankCursor(!isBlankCursor());
 	}
 
 	// -------------------------------LISTENERS---------------------------------
@@ -170,29 +193,9 @@ public class GUIManager {
 							infoFrame.create();
 							infoFrame.setVisible(true);
 							break;
-						/*
-						 * case SAVE:
-						 * manager.getWorldManager().save(); break; case LOAD:
-						 * try { manager.getWorldManager().load(); } catch
-						 * (ConversionException ex) { manager.exception(ex,
-						 * "The Level you tried to load seems to depend on a Modification not being available."
-						 * ); } break; case SAVE_AS:
-						 * manager.getWorldManager().saveAs(); break; case
-						 * LOAD_FROM: try {
-						 * manager.getWorldManager().loadFrom(); } catch
-						 * (ConversionException ex) { manager.exception(ex,
-						 * "The Level you tried to load seems to depend on a Modification not being available."
-						 * ); } break; case CONVERT: if
-						 * (manager.getWorldManager().convert()) {
-						 * manager.message("Conversation complete.",
-						 * "Converted"); } break; case PLAY_PAUSE:
-						 * manager.getWorld().toggleActive(); break; case
-						 * TRACES: setCanvasTraces((Integer) a.additional);
-						 * break; case BRUSH: setCanvasBrushSize((Integer)
-						 * a.additional); break; case MODS: ModFrame modFrame =
-						 * new ModFrame(guiManager); modFrame.create();
-						 * modFrame.refresh(); modFrame.setVisible(true); break;
-						 */
+						case CURSOR:
+							toggleBlankCursor();
+							break;
 						default:
 							chaught = false;
 							break;
@@ -309,7 +312,8 @@ public class GUIManager {
 
 	@SuppressWarnings("unchecked")
 	public void removeActions(InputStream from) {
-		//FIXME Crashes when updateXStream is called between setActive and removeActions.
+		// FIXME Crashes when updateXStream is called between setActive and
+		// removeActions.
 		List<AbstractAction<?>> newKeyCommands = (List<AbstractAction<?>>) manager.getXStream().fromXML(from);
 		keyCommands.removeAll(newKeyCommands);
 	}

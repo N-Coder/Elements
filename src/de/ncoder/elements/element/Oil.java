@@ -3,20 +3,20 @@ package de.ncoder.elements.element;
 import de.ncoder.elements.element.type.Burnable;
 import de.ncoder.elements.engine.Element;
 
-public class Oil extends Element implements Burnable{
+public class Oil extends Element implements Burnable {
 	private boolean burning = false;
 	private int timeout;
-	
+
 	public Oil() {
 		setColor(110, 99, 86);
 		setGravity(1);
 		setFluidity(5);
-		timeout = random.nextInt(200)+100;
+		timeout = random.nextInt(200) + 100;
 	}
 
 	@Override
 	public void act() {
-		if(burning) {
+		if (burning) {
 			switch (random.nextInt(4)) {
 			case 0:
 				interactWith(getX() + 1, getY());
@@ -31,25 +31,25 @@ public class Oil extends Element implements Burnable{
 				interactWith(getX(), getY() - 1);
 				break;
 			}
+			if (timeout <= 0) {
+				getWorld().removeElement(this);
+			}
+			timeout--;
 		}
-		if(timeout<=0) {
-			getWorld().removeElement(this);
-		}
-		timeout--;
 	}
-	
+
 	@Override
 	public void interactWithSpace(int x, int y) {
 		getWorld().setElementAt(x, y, new Fire());
 	}
-	
+
 	@Override
 	public void interactWithElement(Element e) {
-		if(e instanceof Burnable) {
+		if (e instanceof Burnable) {
 			((Burnable) e).burn(this);
 		}
 	}
-	
+
 	@Override
 	public void burn(Element from) {
 		burning = true;

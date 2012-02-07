@@ -20,6 +20,7 @@ public final class ModManifest {
 		this.modVersionName = modVersionName;
 		this.modVersion = modVersion;
 		this.modDescription = modDescription;
+		System.out.println(this);
 	}
 
 	public String getModName() {
